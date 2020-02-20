@@ -39,7 +39,7 @@ const UpdateMovie = props => {
   };
 
   return (
-    <div>
+    <div className="form">
       <h1>Update Item</h1>
       <Form onSubmit={handleSubmit}>
         <Row form>

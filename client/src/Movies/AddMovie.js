@@ -48,7 +48,7 @@ const AddMovie = props => {
   };
 
   return (
-    <div>
+    <div className="form">
       <Form onSubmit={handleSubmit}>
         <Row form>
           <Col md={4}>

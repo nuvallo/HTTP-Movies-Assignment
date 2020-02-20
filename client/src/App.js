@@ -43,6 +43,18 @@ const App = props => {
       .catch(err => console.log(err));
   };
 
+  const deleteItem = id => {
+    const myPromise = axios.delete(`http://localhost:5000/api/movies/${id}`);
+    myPromise
+      .then(res => {
+        setItems(res.data);
+        props.history.push("/");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <SavedList list={savedList} />
@@ -52,12 +64,22 @@ const App = props => {
         path="/add-movie"
         render={props => <AddMovie {...props} items={items} />}
       />
-      <Route path="/update-movie/:id" render={props => <UpdateMovie />} />
+      <Route
+        path="/update-movie/:id"
+        render={props => (
+          <UpdateMovie {...props} items={items} updateItem={updateItem} />
+        )}
+      />
       <Route
         path="/movies/:id"
         render={props => {
           return (
-            <Movie {...props} addToSavedList={addToSavedList} items={items} />
+            <Movie
+              {...props}
+              addToSavedList={addToSavedList}
+              items={items}
+              deleteItem={deleteItem}
+            />
           );
         }}
       />
